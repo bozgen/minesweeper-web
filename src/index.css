@@ -1,13 +1,54 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+body{
+    margin: 0;
+    font-family: Inter, sans-serif;
+    background: #272D37;
+    color: #FFFFFF;
+    padding: 2em 3em;
+    cursor:default;
+}
+/* Header */
+
+header{
+    text-align: center;
+}
+.header-times{
+    font-size: 1.2rem;
+    color: #DDDDDD;
+    display: flex;
+    justify-content: space-between;
+
+}
+.header-times > h3{
+    font-weight: 500;
+}
+.header-times > h3 > span{
+    font-weight: 600;
+}
+header > h1{
+    font-size: 3rem;
+    margin: 2rem auto;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Game */
+
+.game-grid{
+    padding: 10px;
+    background: #888899;
+    display: grid;
+    justify-content: center;
+    grid-template: repeat(8, 50px) / repeat(8,minmax(50px,50px));
+    grid-gap: 10px;
+}
+/* Cell */
+.cell{
+    background: #FFF;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+.cell-value{
+    margin: 0;
+    color: #F28621;
 }
