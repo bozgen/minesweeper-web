@@ -199,7 +199,7 @@ export default function Game(props){
             { !props.gameScreen && <button className="play-btn" onClick={placeBombs}>Play</button>}
             { props.gameScreen==="win" && <h1 className="you-win">You win!</h1> }
             { props.gameTime.newTime===props.gameTime.best && <h1 className="new-record">NEW RECORD!</h1> }
-            { props.gameScreen==="win" && <h1 className="win-time">your time: {props.gameTime.newTime}</h1>}
+            { props.gameScreen==="win" && <h1 className="win-time">your time: {props.gameTime.newTime}s</h1>}
             { props.gameScreen==="win" && <button className="win-btn" onClick={placeBombs}>Play Again</button>}
             { props.gameScreen==="win" && <Confetti width={width} height={height}/>}
             { props.gameScreen===true && <div className="game-grid">
