@@ -1,6 +1,9 @@
 import React from "react";
 import { useState, useEffect } from "react";
+
+// 3rd party
 import { nanoid } from "nanoid";
+import Confetti from "react-confetti";
 //COMPONENTS
 import Cell from "./Cell";
 
@@ -154,6 +157,27 @@ export default function Game(props){
         }
     }
 
+    function useWindowSize() {
+        const [windowSize, setWindowSize] = useState({
+          width: undefined,
+          height: undefined,
+        });
+        useEffect(() => {
+          function handleResize() {
+            setWindowSize({
+              width: window.innerWidth,
+              height: window.innerHeight,
+            });
+          }
+          window.addEventListener("resize", handleResize);
+          handleResize();
+          return () => window.removeEventListener("resize", handleResize);
+        }, []);
+        return windowSize;
+      }
+
+
+
     const cellElements = cells.map(cellArr => {
         return( cellArr.map(cell =>{
             return(
@@ -168,11 +192,14 @@ export default function Game(props){
         }))
     })
 
+    const { width,height } = useWindowSize();
+
     return(
         <main className="game">
             { !props.gameScreen && <button className="play-btn" onClick={placeBombs}>Play</button>}
             { props.gameScreen==="win" && <h1 className="you-win">You win!</h1> }
             { props.gameScreen==="win" && <button className="win-btn" onClick={placeBombs}>Play Again</button>}
+            { props.gameScreen==="win" && <Confetti width={width} height={height}/>}
             { props.gameScreen===true && <div className="game-grid">
                 {cellElements}
             </div>}
