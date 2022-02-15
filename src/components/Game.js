@@ -21,7 +21,7 @@ export default function Game(props){
             })){
                 // if every cell that is not a bomb is opened;
                 setCells(newGrid());
-                props.setGameOn(false);
+                props.setGameScreen("win");
             }
         }
         
@@ -80,7 +80,7 @@ export default function Game(props){
             }
             setCells(newCells)
         })
-        props.setGameOn(true)
+        props.setGameScreen(true)
     } 
     // console.log(cells)
     
@@ -94,7 +94,7 @@ export default function Game(props){
                 const newCells = [...cells]
                 if(cells[pos.row][pos.col].value==="bomb"){
                     setCells(newGrid());
-                    props.setGameOn(false);
+                    props.setGameScreen(false);
                     return;
                 }
                 if(cells[pos.row][pos.col].value===0){
@@ -170,8 +170,9 @@ export default function Game(props){
 
     return(
         <main className="game">
-            { !props.gameOn && <button className="play-btn" onClick={placeBombs}>Play</button>}
-            { props.gameOn && <div className="game-grid">
+            { !props.gameScreen && <button className="play-btn" onClick={placeBombs}>Play</button>}
+            { props.gameScreen==="win" && <button className="play-btn" onClick={placeBombs}>Play Again</button>}
+            { props.gameScreen===true && <div className="game-grid">
                 {cellElements}
             </div>}
         </main>
