@@ -52,6 +52,7 @@ main{
     display: grid;
     justify-content: center;
     align-items: center;
+    border-radius: 2px;
 }
 .cell-value{
     margin: 0;
