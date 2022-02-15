@@ -171,7 +171,8 @@ export default function Game(props){
     return(
         <main className="game">
             { !props.gameScreen && <button className="play-btn" onClick={placeBombs}>Play</button>}
-            { props.gameScreen==="win" && <button className="play-btn" onClick={placeBombs}>Play Again</button>}
+            { props.gameScreen==="win" && <h1 className="you-win">You win!</h1> }
+            { props.gameScreen==="win" && <button className="win-btn" onClick={placeBombs}>Play Again</button>}
             { props.gameScreen===true && <div className="game-grid">
                 {cellElements}
             </div>}
