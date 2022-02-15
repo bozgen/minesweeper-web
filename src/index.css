@@ -32,7 +32,10 @@ header > h1{
 }
 
 /* Game */
-
+main{
+    display: flex;
+    justify-content: center;
+}
 .game-grid{
     padding: 10px;
     background: #888899;
@@ -51,4 +54,15 @@ header > h1{
 .cell-value{
     margin: 0;
     color: #F28621;
+}
+.play-btn{
+    margin: 5em;
+    padding: 1em 5em;
+    background: #EEE;
+    border: none;
+    border-radius: 2px;
+    color: #222;
+    font-family: Inter, sans-serif;
+    font-weight: 700;
+    font-size: 2rem;
 }

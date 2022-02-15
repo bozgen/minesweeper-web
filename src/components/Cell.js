@@ -5,7 +5,7 @@ import flag from "../img/flag.png";
 export default function Cell(props){
     let value;
     props.value==="bomb"
-    ? value="X"
+    ? value="bomb"
     : value = props.value;
 
     const img = props.img==="bomb"? bomb : flag;

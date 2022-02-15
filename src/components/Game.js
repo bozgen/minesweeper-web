@@ -1,12 +1,31 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { nanoid } from "nanoid";
 //COMPONENTS
 import Cell from "./Cell";
 
-export default function Game(){
+export default function Game(props){
     
     const [cells, setCells] = useState([])
+
+    useEffect(()=>{
+        setCells(newGrid());
+    },[])
+
+    useEffect(()=>{
+        if(cells.some(cellRow=>{return cellRow.some(cell=>{return cell.value==="bomb"})})){
+            if(cells.every(cellRow=>{
+                return cellRow.every(cell=>{
+                    return (cell.value==="bomb" || cell.display==="open")
+                })
+            })){
+                // if every cell that is not a bomb is opened;
+                setCells(newGrid());
+                props.setGameOn(false);
+            }
+        }
+        
+    },[cells])
 
     function newGrid(){
         const rows= []
@@ -23,8 +42,9 @@ export default function Game(){
             rows.push(row)
         }
         setCells(rows)
-        if(cells.length) placeBombs()
+        return rows;
     }
+
     function placeBombs(){
         const bombPlaces = []
         while(bombPlaces.length < 8){
@@ -38,15 +58,29 @@ export default function Game(){
         // console.log(bombPlaces)
         
         bombPlaces.map(bomb=>{
-            const newCells = [...cells]
+            const newCells = [...cells];
+            for(let i=-1;i<2;i++){ // to increment the values around the bombs
+                for(let j=-1;j<2;j++){
+                    const isRowValid = bomb.row+i>=0 && bomb.row+i<8;
+                    const isColValid = bomb.col+j>=0 && bomb.col+j<8;
+                    if( isRowValid && isColValid ){
+                        const cell = newCells[bomb.row+i][bomb.col+j];
+                        if(cell.value!=="bomb"){
+                            cell.value++;
+                        }
+                    }
+                }
+            }
+            // set the bomb
             newCells[bomb.row][bomb.col] = {
-                value:"bomb",
-                display:"closed",
-                img:"bomb",
-                position:{row:bomb.row, col: bomb.col}
+            value:"bomb",
+            display:"closed",
+            img:"bomb",
+            position:{row:bomb.row, col: bomb.col}
             }
             setCells(newCells)
         })
+        props.setGameOn(true)
     } 
     // console.log(cells)
     
@@ -58,10 +92,19 @@ export default function Game(){
         if(cells[pos.row][pos.col].display ==="closed"){
             if(cells[pos.row][pos.col].img!=="flag"){
                 const newCells = [...cells]
+                if(cells[pos.row][pos.col].value==="bomb"){
+                    setCells(newGrid());
+                    props.setGameOn(false);
+                    return;
+                }
+                if(cells[pos.row][pos.col].value===0){
+                    openEmptyCell(newCells,pos)
+                }
                 newCells[pos.row][pos.col] = {
                     ...newCells[pos.row][pos.col],
                     display:"open"
                 }
+                
                 setCells(newCells)
             }
         }
@@ -78,7 +121,12 @@ export default function Game(){
                 setCells(newCells)
             }else{
                 const newCells = [...cells]
-                newCells[pos.row][pos.col] = {
+                newCells[pos.row][pos.col].value==="bomb"
+                ? newCells[pos.row][pos.col] = {
+                    ...newCells[pos.row][pos.col],
+                    img:"bomb"
+                }
+                : newCells[pos.row][pos.col] = {
                     ...newCells[pos.row][pos.col],
                     img:""
                 }
@@ -87,8 +135,24 @@ export default function Game(){
             return false;
         }
     }
+    function openEmptyCell(newCells,pos){
+        if(newCells[pos.row][pos.col].display==="open"){ return }
+        newCells[pos.row][pos.col].display = "open";
 
-
+        if(newCells[pos.row][pos.col].value!==0) {return}
+        if(newCells[pos.row][pos.col].img==="flag") newCells[pos.row][pos.col].img="";
+        setCells(newCells)
+        
+        for(let i=-1;i<2;i++){ // to check the surrounding cells
+            for(let j=-1;j<2;j++){
+                const isRowValid = pos.row+i>=0 && pos.row+i<8;
+                const isColValid = pos.col+j>=0 && pos.col+j<8;
+                if( isRowValid && isColValid ){
+                    openEmptyCell(newCells,{row: pos.row+i, col: pos.col+j})
+                }
+            }
+        }
+    }
 
     const cellElements = cells.map(cellArr => {
         return( cellArr.map(cell =>{
@@ -106,10 +170,10 @@ export default function Game(){
 
     return(
         <main className="game">
-            <button onClick={newGrid}>Play</button>
-            <div className="game-grid">
+            { !props.gameOn && <button className="play-btn" onClick={placeBombs}>Play</button>}
+            { props.gameOn && <div className="game-grid">
                 {cellElements}
-            </div>
+            </div>}
         </main>
     )
 }

@@ -5,10 +5,15 @@ import Game from "./components/Game";
 
 
 export default function App(){
+    const [gameOn, setGameOn] = React.useState(false)
+    
     return(
         <div>
             <Header />
-            <Game />
+            <Game
+                gameOn={gameOn}
+                setGameOn={setGameOn}
+            />
         </div>
     )
 }
