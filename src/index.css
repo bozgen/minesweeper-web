@@ -34,6 +34,8 @@ header > h1{
 /* Game */
 main{
     display: block;
+    width: 490px;
+    margin: 0 auto;
     text-align: center;
 }
 .game-grid{
