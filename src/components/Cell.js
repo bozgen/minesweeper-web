@@ -40,10 +40,7 @@ export default function Cell(props){
             background: "#CFCCCD",
             color: valueColor
         }
-        :{
-            background: "#FFFFFF"
-        }
-        
+        :{}
     }
 
     let value;
@@ -52,10 +49,10 @@ export default function Cell(props){
     const img = props.img==="bomb"? bomb : flag;
 
     return(
-        <div style={styles.cell} onClick={props.openCell} onContextMenu={props.flagCell} className="cell">
-            {props.display==="open" && props.img==="bomb" && <img className="cell-img" src={img}/>}
-            {props.display==="closed" && props.img==="flag" && <img className="cell-img" src={img}/>}
-            {props.img==="" && props.display==="open"? <h1 style={styles.cell}className="cell-value">{value}</h1>: ""}
+        <div style={styles.cell} onClick={props.openCell} onContextMenu={props.flagCell} className="cell">          
+                {props.display==="open" && props.img==="bomb" && <img className="cell-img" src={img}/>}
+                {props.display==="closed" && props.img==="flag" && <img className="cell-img" src={img}/>}
+                {props.img==="" && props.display==="open"? <h1 style={styles.cell}className="cell-value">{value}</h1>: ""}
         </div>
     )
 }
