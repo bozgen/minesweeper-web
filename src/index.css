@@ -18,6 +18,10 @@ header{
     color: #DDDDDD;
     display: flex;
     justify-content: space-between;
+    background-color: rgba(0,0,0,0.25);
+    padding: 0 2rem;
+    max-width: 700px;
+    margin: 0 auto;
 
 }
 .header-times > h3{
@@ -34,7 +38,7 @@ header > h1{
 /* Game */
 main{
     display: block;
-    width: 490px;
+    max-width: 490px;
     margin: 0 auto;
     text-align: center;
 }
@@ -43,7 +47,7 @@ main{
     background: #888899;
     display: grid;
     justify-content: center;
-    grid-template: repeat(8, 50px) / repeat(8,minmax(50px,50px));
+    grid-template: repeat(8, minmax(30px,50px)) / repeat(8,minmax(30px,50px));
     grid-gap: 10px;
 }
 /* Cell */
@@ -59,7 +63,7 @@ main{
     color: #F28621;
 }
 .play-btn{
-    margin: 5em 0;
+    margin: 5em auto;
     padding: 2rem 10rem;
     background: #EEE;
     border: none;
@@ -84,4 +88,10 @@ main{
     padding: 0;
     font-size: 3rem;
     margin: 10rem auto 0;
+}
+.new-record{
+    color: tomato;
+    font-weight: 600;
+    font-size: 2rem;
+    margin: 1rem auto;
 }
