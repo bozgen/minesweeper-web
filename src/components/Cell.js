@@ -3,18 +3,59 @@ import bomb from "../img/bomb.png";
 import flag from "../img/flag.png";
 
 export default function Cell(props){
+    
+    let valueColor;
+    switch(props.value){
+        case 1:
+            valueColor = "#4B73DA";
+            break;
+        case 2:
+            valueColor = "#4CA85B";
+            break;
+        case 3:
+            valueColor = "#FFF48C";
+            break;
+        case 4:
+            valueColor = "#F28621";
+            break;
+        case 5:
+            valueColor = "#DF4F3C";
+            break;
+        case 6:
+            valueColor = "#CE362C";
+            break;
+        case 7:
+            valueColor = "#AE0000";
+            break;
+        case 8:
+            valueColor = "#7B0000";
+            break;
+        default:
+            valueColor = "#000000";
+            break;
+    }
+    const styles = {
+        cell: props.display==="open"
+        ?{
+            background: "#CFCCCD",
+            color: valueColor
+        }
+        :{
+            background: "#FFFFFF"
+        }
+        
+    }
+
     let value;
-    props.value==="bomb"
-    ? value="bomb"
-    : value = props.value;
+    props.value===0     ?value=""   :value = props.value
 
     const img = props.img==="bomb"? bomb : flag;
 
     return(
-        <div onClick={props.openCell} onContextMenu={props.flagCell} className="cell">
+        <div style={styles.cell} onClick={props.openCell} onContextMenu={props.flagCell} className="cell">
             {props.display==="open" && props.img==="bomb" && <img className="cell-img" src={img}/>}
             {props.display==="closed" && props.img==="flag" && <img className="cell-img" src={img}/>}
-            {props.img==="" && props.display==="open"? <h1 className="cell-value">{value}</h1>: ""}
+            {props.img==="" && props.display==="open"? <h1 style={styles.cell}className="cell-value">{value}</h1>: ""}
         </div>
     )
 }
