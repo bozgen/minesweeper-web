@@ -125,7 +125,7 @@ main{
         background: #888899;
         display: grid;
         justify-content: center;
-        grid-template: repeat(8,30px) / repeat(8,30px);
+        grid-template: repeat(8,40px) / repeat(8,40px);
         grid-gap: 1px;
     }
     h1{
