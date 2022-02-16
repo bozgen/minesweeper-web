@@ -48,7 +48,7 @@ export default function Time(props){
                     localStorage.setItem("bestTime", newTime)
                 }
             }
-            else if(gameScreen===true){
+            else if(gameScreen==="game"){
                 //start timer
                 
                 interval = setInterval(()=>{

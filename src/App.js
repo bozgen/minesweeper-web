@@ -4,7 +4,7 @@ import Time from "./components/Time";
 
 
 export default function App(){
-    const [gameScreen, setGameScreen] = React.useState(false)
+    const [gameScreen, setGameScreen] = React.useState("initial")
     
     return(
         <Time
