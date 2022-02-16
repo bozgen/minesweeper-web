@@ -121,14 +121,16 @@ export default function Game(props){
                 setCells(newCells)
             }else{
                 const newCells = [...cells]
-                newCells[pos.row][pos.col].value==="bomb"
-                ? newCells[pos.row][pos.col] = {
-                    ...newCells[pos.row][pos.col],
-                    img:"bomb"
-                }
-                : newCells[pos.row][pos.col] = {
-                    ...newCells[pos.row][pos.col],
-                    img:""
+                if(newCells[pos.row][pos.col].value==="bomb"){
+                    newCells[pos.row][pos.col] = {
+                        ...newCells[pos.row][pos.col],
+                        img:"bomb"
+                    }
+                }else{
+                    newCells[pos.row][pos.col] = {
+                        ...newCells[pos.row][pos.col],
+                        img:""
+                    }
                 }
                 setCells(newCells)
             }
@@ -158,6 +160,7 @@ export default function Game(props){
         const newCells = [...cells];
         bombPlacesState.forEach(bomb=>{
             newCells[bomb.row][bomb.col].display="open"
+            newCells[bomb.row][bomb.col].img="bomb"
         })
         setCells(newCells)
     }
