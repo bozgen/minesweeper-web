@@ -115,10 +115,19 @@ main{
 }
 
 @media (max-width: 500px){
+    body{
+        width: 100vw;
+        height: 100vh;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+    }
     main{
-        display: block;
-        margin: 0 auto;
+        display: flex;
+        justify-content: center;
         text-align: center;
+        margin: 0 auto;
     }
     .game-grid{
         padding: 10px;
@@ -128,7 +137,42 @@ main{
         grid-template: repeat(8,40px) / repeat(8,40px);
         grid-gap: 1px;
     }
-    h1{
+    header > h1{
         font-size: 1.5rem;
+        margin: 5rem auto 1rem;
+    }
+    .play-btn{
+        padding: 2rem 5rem;
+        font-size: 1rem;
+    }
+    .cell-img{
+        width: 1.7rem;
+    }
+    .cell{
+        font-size: .8rem;
+    }
+}
+@media (max-width: 350px){
+    main{
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        margin: 0 auto;
+    }
+    .game-grid{
+        background: #888899;
+        display: grid;
+        justify-content: center;
+        grid-template: repeat(8,30px) / repeat(8,30px);
+        grid-gap: 1px;
+    }
+    .cell{
+        font-size: .6rem;
+    }
+    .cell-img{
+        width: 1.3rem;
+    }
+    .header-times{
+        max-width: 200px;
     }
 }
