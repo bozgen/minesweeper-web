@@ -35,7 +35,7 @@ export default function Cell(props){
             break;
     }
     const styles = {
-        cell: props.display==="open"
+        cell: props.display===true
         ?{
             background: "#CFCCCD",
             color: valueColor
@@ -48,11 +48,14 @@ export default function Cell(props){
     ?value=""
     :value = props.value;
 
-    const img = props.img==="bomb"? bomb : flag;
+    let img;
+    if(props.img==="bomb")      img = bomb;
+    else if(props.img==="flag") img = flag;
+    else                        img = "";
     
-    const bombShouldShow =  props.display==="open" && props.img==="bomb";
-    const flagShouldShow =  props.display==="closed" && props.img==="flag";
-    const valueShouldShow = props.img==="" && props.display==="open";
+    const bombShouldShow =  props.display===true && props.img==="bomb";
+    const flagShouldShow =  props.display===false && props.img==="flag";
+    const valueShouldShow = props.img==="" && props.display===true;
     return(
         <div
         style={styles.cell}
