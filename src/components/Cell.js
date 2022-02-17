@@ -44,15 +44,24 @@ export default function Cell(props){
     }
 
     let value;
-    props.value===0     ?value=""   :value = props.value
+    props.value===0
+    ?value=""
+    :value = props.value;
 
     const img = props.img==="bomb"? bomb : flag;
-
+    
+    const bombShouldShow =  props.display==="open" && props.img==="bomb";
+    const flagShouldShow =  props.display==="closed" && props.img==="flag";
+    const valueShouldShow = props.img==="" && props.display==="open";
     return(
-        <div style={styles.cell} onClick={props.openCell} onContextMenu={props.flagCell} className="cell">          
-                {props.display==="open" && props.img==="bomb" && <img className="cell-img" src={img}/>}
-                {props.display==="closed" && props.img==="flag" && <img className="cell-img" src={img}/>}
-                {props.img==="" && props.display==="open"? <h1 style={styles.cell}className="cell-value">{value}</h1>: ""}
+        <div
+        style={styles.cell}
+        onClick={props.openCell}
+        onContextMenu={props.flagCell}
+        className="cell">
+                {bombShouldShow && <img className="cell-img" src={img}/>}
+                {flagShouldShow && <img className="cell-img" src={img}/>}
+                {valueShouldShow && <h1 style={styles.cell}className="cell-value">{value}</h1>}
         </div>
     )
 }
