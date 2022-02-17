@@ -122,12 +122,10 @@ main{
         height: 100vh;
         padding: 0;
         margin: 0;
-        display: flex;
-        justify-content: center;
+        display: block;
     }
     main{
-        display: flex;
-        justify-content: center;
+        display: block;
         text-align: center;
         margin: 0 auto;
     }
@@ -153,11 +151,18 @@ main{
     .cell{
         font-size: .8rem;
     }
+    .you-win{
+        margin: 4rem auto 2rem;
+    }
+    .win-btn{
+        font-size: 1rem;
+        padding: 1rem 2rem;
+        margin: 1rem auto;
+    }
 }
 @media (max-width: 350px){
     main{
-        display: flex;
-        justify-content: center;
+        display: block;
         text-align: center;
         margin: 0 auto;
     }
